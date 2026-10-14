@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2,719 Ways of Telling a Story</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--bg:#1D1D1B;--fg:#fff;background:var(--bg);color:var(--fg);transition:background .9s}
+body[data-mode=light]{--bg:#EAE4DA;--fg:#1D1D1B}
+#c{position:fixed;inset:0;z-index:0}
+header{position:fixed;top:0;left:0;right:0;z-index:6;display:flex;justify-content:space-between;padding:14px 4vw;font-size:14px;font-weight:700}
+header a{color:var(--fg);margin-left:18px}
+main{position:relative;z-index:2}
+.step{min-height:88vh;display:flex;align-items:center;padding:0 4vw}
+.card{background:#fff;color:#1D1D1B;max-width:370px;padding:18px 22px;border-radius:12px;border:1.5px solid #1D1D1B;box-shadow:6px 6px 0 #1D1D1B}
+.card p{margin:.5em 0}.card b.try{color:#C63F3E}
+.btn{display:inline-block;margin-top:6px;padding:8px 14px;background:#245E55;color:#fff!important;border-radius:8px;font-weight:700;text-decoration:none}
+.hero,.fin{min-height:100vh;flex-direction:column;text-align:center}
+.hero{justify-content:flex-start;padding-top:15vh}.fin{justify-content:center}
+.hero *,.fin *{text-shadow:0 0 14px #1D1D1B,0 0 4px #1D1D1B}
+.hero h1{font-size:clamp(34px,6vw,68px);line-height:1.05;margin:.2em 0}
+.hero p{max-width:640px;margin:.6em auto;font-size:clamp(17px,2.2vw,22px)}
+.kick{letter-spacing:.12em;text-transform:uppercase;font-size:13px}
+.fin p{max-width:700px;margin:.5em auto;font-size:clamp(17px,2vw,21px)}
+.fin .big{font-size:clamp(26px,4.5vw,50px);line-height:1.15;font-weight:800}
+#bar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:5;background:#fff;color:#1D1D1B;border:1.5px solid #1D1D1B;border-radius:12px;padding:8px 12px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:center;max-width:96vw;font-size:13px}
+#bar[data-m=off]{display:none}#bar[data-m=legend] .f{display:none}
+.chip{font:inherit;font-size:13px;border:1.5px solid #1D1D1B;background:#EAE4DA;color:#1D1D1B;border-radius:999px;padding:3px 10px;cursor:pointer;margin:2px}
+.chip[aria-pressed=false]{opacity:.45;text-decoration:line-through;background:#fff}
+.chip:disabled{cursor:default}#bar[data-m=legend] .chip{opacity:1;text-decoration:none;background:#fff}
+.chip i{display:inline-block;width:10px;height:10px;border-radius:50%;border:1px solid #1D1D1B;margin-right:5px}
+#msg{color:#C63F3E;font-weight:700;width:100%;text-align:center}#msg:empty{display:none}
+#tip{position:fixed;z-index:7;background:#1D1D1B;color:#fff;padding:4px 9px;border-radius:6px;font-size:13px;pointer-events:none;display:none}
+#details{position:relative;z-index:3;background:#F4F0E8;color:#1D1D1B;padding:8vh 4vw}
+#details>div{max-width:860px;margin:0 auto}#details h2{margin:2em 0 .4em;font-size:26px}#details a{color:#245E55;font-weight:600}
+figure{margin:1em 0}figure img{max-width:100%;border:1px solid #D8D0C2}figcaption{font-size:14px}
+.emb{position:relative;height:760px;border:1.5px solid #1D1D1B;background:#fff}.emb iframe{width:100%;height:100%;border:0}
+.ovl{position:absolute;inset:0;background:rgba(29,29,27,.6);color:#fff;font-size:20px;font-weight:700;border:0;cursor:pointer}
+.todo{background:#EAE4DA;padding:14px;border:1.5px dashed #1D1D1B}
+@media(max-width:899px){.step:not(.hero):not(.fin){align-items:flex-end;padding-bottom:16vh}.card{max-width:none;width:100%}}
+.chart{margin:.6em 0}.leg{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13px;margin-bottom:6px}.leg i{display:inline-block;width:12px;height:12px;border:1.5px solid #1D1D1B;margin-right:5px}
+.cols{display:flex;gap:16px}.col{flex:1;min-width:0}
+.grp{height:250px;display:flex;align-items:flex-end;gap:4px;border-bottom:2px solid #1D1D1B;background:repeating-linear-gradient(to top,transparent 0,transparent calc(25% - 1px),#D8D0C2 calc(25% - 1px),#D8D0C2 25%)}
+.bw{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;min-width:0}
+.val{font-size:11px;font-weight:700;text-align:center;line-height:1.1;margin-bottom:2px;opacity:0;transition:opacity .5s .7s}
+.bar{width:100%;height:0;border:1.5px solid #1D1D1B;border-bottom:0;transition:height 1s cubic-bezier(.2,.8,.2,1)}
+.chart.on .bar{height:calc(var(--h)*.82%)}.chart.on .val{opacity:1}
+.gl{text-align:center;font-size:13px;font-weight:700;margin-top:5px}
+@media(prefers-reduced-motion:reduce){.bar,.val{transition:none}}
+</style></head><body data-mode="dark">
+<canvas id="c" aria-hidden="true"></canvas>
+<header><span>Endangered languages</span><nav><a href="https://endangered-languages.streamlit.app/" target="_blank" rel="noopener">Dashboard ↗</a><a href="#details">Project details ↓</a></nav></header>
+<div id="bar" data-m="off"><span class="f" id="areas"></span><span id="stats"></span><span class="f" id="cnt" role="status"></span><button class="chip f" id="rst">Reset</button><span id="msg" role="alert"></span></div>
+<div id="tip"></div>
+<main>
+<section class="step hero" data-s="hero"><div class="kick">DESIGNTK 530 · Midterm project</div>
+<h1><span id="n">2,719</span> ways of telling a story</h1>
+<p>How are speaker population and geographic location associated with the severity of language endangerment around the world?</p><p aria-hidden="true">Scroll ↓</p></section>
+<section class="step" data-s="intro"><div class="card"><p><b>Each dot is a language.</b></p><p>Together they are every language in this dataset that is endangered or extinct and has a map location. Stable languages are not included, so it can't say what share of all languages are at risk.</p></div></section>
+<section class="step" data-s="map"><div class="card"><p><b>They land where each language is from.</b> Dense places may just have many languages.</p><p><b class="try">Try it:</b> use the filters at the bottom, and hover over a dot to see its name.</p></div></section>
+<section class="step" data-s="tropics"><div class="card"><p><b>My first guess: the tropics.</b></p><p>The shaded band is the tropics. Overall, 31.3% of languages inside it are critically endangered or extinct, against 31.9% outside. The guess didn't hold up, and the pattern even flips between world areas.</p></div></section>
+<section class="step" data-s="size"><div class="card"><p><b>Smaller means more at risk.</b></p><p>Each column is a speaker group, stacked by status. The big number is the share that is critically endangered among living languages.</p></div></section>
+<section class="step" data-s="place"><div class="card"><p><b>Same size, different place.</b></p><p>Among languages with 100 to 999 speakers, about 55% in Europe, Africa &amp; W. Asia are critically endangered, against 13 to 15% elsewhere. Place seems to matter, but this data can't say why.</p></div></section>
+<section class="step" data-s="words"><div class="card"><p><b>What Wikipedia says.</b> In a random sample of 56 articles, teaching and revival words appear in 12 of 20 Americas articles, 7 of 17 in Europe, Africa &amp; W. Asia, and 3 of 19 in Asia &amp; Oceania.</p><p>On few speakers: <i>"The language's last native speaker, Della Prince, died in 1962."</i> (Wiyot)</p><p>A counterexample: Banawá Yafi has about 1,000 speakers but is listed as Vulnerable.</p><a class="btn" href="https://endangered-languages.streamlit.app/" target="_blank" rel="noopener">Explore the full dashboard ↗</a></div></section>
+<section class="step fin" data-s="f1"><p class="big">We tell stories all the time.</p><p>Where we come from, what a song means, how we got here. Every dot here is a language people use to tell theirs.</p></section>
+<section class="step fin" data-s="f2"><p>A language can hold a great deal. Tulu, which still has millions of speakers, carries the Epic of Siri, an oral epic that Wikipedia says is nearly as long as the Iliad.</p><p class="big">Now imagine the stories that go quiet when the last speaker does. Which ones will we still be able to hear?</p><p><a class="btn" href="#details">See the project details ↓</a></p></section>
+</main>
+<div id="details"><div>
+<h1>Project details</h1><p>By <b>YOUR NAME</b> · DESIGNTK 530 · Fall 2026 <!-- TODO: add your name --></p>
+<h2>Overview</h2>
+<p><b>Question:</b> How are speaker population and geographic location associated with the severity of language endangerment around the world? <b>Audience:</b> community language programs and the groups that support them.</p>
+<p><b>Data:</b> <a href="https://www.kaggle.com/datasets/andywarui/endangered-languages-project">Endangered Languages Project on Kaggle</a> (Andy Warui). One row per endangered or extinct language, with status, estimated speakers, and one map point: 2,722 languages, 2,719 with a location. The collection method is not documented, and stable languages are not included. For the text analysis I used the plain text of 56 Wikipedia articles from a random sample.</p>
+<h2>Key findings</h2>
+<ul><li>Smaller languages are usually more endangered.</li><li>At the same size, place still matters: about 55% of languages with 100 to 999 speakers in Europe, Africa &amp; W. Asia are critically endangered, against 13 to 15% elsewhere.</li><li>The tropics did not predict risk (31.3% vs 31.9%).</li><li>Wikipedia articles mention teaching and revival more often for the Americas (12 of 20) than Asia &amp; Oceania (3 of 19).</li></ul>
+<p>These are patterns, not causes, from one snapshot of endangered languages only.</p>
+<h2>Selected EDA graphs</h2>
+<figure role="img" aria-label="Bar chart: share of living languages that are critically endangered, by speaker group and world area. For 100 to 999 speakers, about 55% in Europe, Africa and W. Asia versus 13 to 15% elsewhere."><div class="chart" id="ch1"></div><figcaption>Same size, different place: share of living languages that are critically endangered. For 100 to 999 speakers, Europe, Africa &amp; W. Asia stands out. Bars rise as you scroll to them.</figcaption></figure>
+<figure role="img" aria-label="Bar chart: share of languages critically endangered or extinct, tropics versus outside, overall and by world area. Overall 31.3% inside and 31.9% outside; the direction flips between world areas."><div class="chart" id="ch2"></div><figcaption>Tropics test: share critically endangered or extinct. The overall difference is tiny and flips direction between world areas.</figcaption></figure>
+<h2>Interactive dashboard</h2>
+<div class="emb"><iframe src="https://endangered-languages.streamlit.app/?embed=true" title="Interactive dashboard" loading="lazy"></iframe><button class="ovl" id="ovl">Click to interact with the dashboard</button></div>
+<p><a href="https://endangered-languages.streamlit.app/" target="_blank" rel="noopener">Open the dashboard in its own tab ↗</a></p>
+<h2>Proposed A/B test</h2>
+<p>An app for learning an endangered language. <b>A:</b> lessons only. <b>B:</b> the same lessons plus a way to connect with a volunteer speaker. <b>We expect</b> that adding speaker connections will lead to more learners still doing lessons four weeks after sign-up, because a real person to talk to gives them a reason to come back. <b>Main measure:</b> the share of new learners who finish at least one lesson between day 22 and day 28. <b>Watch:</b> volunteers leaving. Adopt B only if it gains about 10 points (an example, set in advance) and no more than 1 in 5 volunteers leave. A language community must agree first, and volunteers control their own availability.</p>
+<h2>Screen-recorded walkthrough</h2>
+<div class="todo">TODO: replace this box with your video embed, for example &lt;iframe src="https://www.youtube.com/embed/VIDEO_ID" width="100%" height="450" allowfullscreen&gt;&lt;/iframe&gt;</div>
+<p style="font-size:14px;margin-top:3em">Built with D3 and Streamlit. An AI assistant (Claude) helped with code and layout.</p>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.8.5/dist/d3.min.js"></script>
+<script>
+const INK="#1D1D1B",ORDER=["Vulnerable","Definitely endangered","Severely endangered","Critically endangered","Extinct"],
+COL={Vulnerable:"#9ED6DF","Definitely endangered":"#EAC119","Severely endangered":"#ED773C","Critically endangered":"#C63F3E",Extinct:INK},
+BANDS=["<100","100-999","1k-9.9k","10k+","unknown"],DARK=new Set(["hero","intro","f1","f2"]),
+RM=matchMedia("(prefers-reduced-motion: reduce)").matches,LA=RM?1:.08,
+cv=document.getElementById("c"),ctx=cv.getContext("2d"),bar=document.getElementById("bar"),tip=document.getElementById("tip");
+let W,H,DPR,box,proj,land=null,landPath=null,D=[],scene="hero",labels=[],labA=0,landA=0,ovA=0,strA=0,tl=0,to=0,ts=0;
+const areaSel=new Set(),stSel=new Set(ORDER),rgb=h=>{const c=d3.color(h);return[c.r,c.g,c.b]},
+pass=d=>areaSel.has(d.area)&&stSel.has(d.st),sev=(a,b)=>ORDER.indexOf(b.st)-ORDER.indexOf(a.st);
+function resize(){W=innerWidth;H=innerHeight;DPR=Math.min(2,devicePixelRatio||1);cv.width=W*DPR;cv.height=H*DPR;cv.style.width=W+"px";cv.style.height=H+"px";
+ box=W>=900?{x:W*.36,y:70,w:W*.62,h:H-150}:{x:8,y:64,w:W-16,h:H*.46};
+ proj=d3.geoNaturalEarth1().fitExtent([[box.x,box.y],[box.x+box.w,box.y+box.h]],{type:"MultiPoint",coordinates:[[-180,0],[180,0],[0,84],[0,-58]]});
+ landPath=land?new Path2D(d3.geoPath(proj)(land)):null;if(D.length)layout()}
+function pack(a,x,w,yB,s){const per=Math.max(1,Math.floor(w/s)),off=(w-per*s)/2+s/2;a.forEach((d,i)=>{d.tx=x+off+(i%per)*s;d.ty=yB-s/2-Math.floor(i/per)*s})}
+function lab(x,y,a,name){const live=a.filter(d=>d.st!=="Extinct"),c=live.filter(d=>d.st==="Critically endangered").length;
+ return{x,y:y+8,big:live.length&&name!=="unknown"?Math.round(100*c/live.length)+"%":"",name,sub:a.length+" languages"}}
+function sizeLayout(place){const gap=12,cw=(box.w-gap*4)/5,hA=box.h*.6,yB=box.y+box.h*.8,by=b=>D.filter(d=>d.band===b),
+ s=Math.min(9,Math.sqrt(.9*cw*hA/Math.max(...BANDS.map(b=>by(b).length))));
+ BANDS.forEach((b,i)=>{const a=by(b).sort(sev),x=box.x+i*(cw+gap);pack(a,x,cw,yB,s);a.forEach(d=>{d.tr=s*.4;d.ta=place?.07:.9});if(!place)labels.push(lab(x+cw/2,yB,a,b))});
+ if(place){const AR=[...new Set(D.map(d=>d.area))].sort(),c3=(box.w-gap*2)/3,g=AR.map(a=>D.filter(d=>d.band==="100-999"&&d.area===a)),
+  s3=Math.min(12,Math.sqrt(.9*c3*hA/Math.max(...g.map(a=>a.length))));
+  g.forEach((a,i)=>{a.sort(sev);const x=box.x+i*(c3+gap);pack(a,x,c3,yB,s3);a.forEach(d=>{d.tr=s3*.4;d.ta=.9});labels.push(lab(x+c3/2,yB,a,AR[i]))})}}
+function layout(){const s=scene,dk=DARK.has(s);labels=[];labA=0;
+ D.forEach(d=>{d.tr=3.2;d.ta=.9;d.tc=rgb(dk&&d.st==="Extinct"?"#EAE4DA":COL[d.st])});
+ if(s==="hero")D.forEach(d=>{const n=Math.sin(d.th);d.tx=W/2+Math.min(W*.46,560)*d.u*Math.cos(d.th);d.ty=H*.27+H*.24*d.u*n*(n>0?.5:1);d.ta=.55});
+ else if(s==="intro"||s==="words")D.forEach(d=>{d.tx=d.sx*W;d.ty=d.sy*H;d.ta=s==="intro"?.3:.12});
+ else if(s==="size"||s==="place")sizeLayout(s==="place");
+ else D.forEach(d=>{const p=proj([d.lon,d.lat]);d.tx=p[0];d.ty=p[1];
+  d.ta=(s==="map"||s==="tropics")?(pass(d)?.9:.04):s==="f1"?(d.rk<.5?.85:.07):(d.rk<.006?1:.05)})}
+function upd(){const n=D.filter(pass).length;document.getElementById("cnt").textContent=`Showing ${n.toLocaleString()} of ${D.length.toLocaleString()} languages`;
+ document.getElementById("msg").textContent=n?"":"No languages match these filters. Turn a filter back on."}
+function go(s){scene=s;document.body.dataset.mode=DARK.has(s)?"dark":"light";tl=s==="map"||s==="tropics"?1:0;to=s==="tropics"?1:0;ts=DARK.has(s)?0:1;
+ const m=s==="map"||s==="tropics"?"filter":s==="size"||s==="place"?"legend":"off";bar.dataset.m=m;
+ document.querySelectorAll("#stats .chip").forEach(b=>b.disabled=m!=="filter");tip.style.display="none";if(D.length){layout();upd()}}
+function frame(){ctx.setTransform(DPR,0,0,DPR,0,0);ctx.clearRect(0,0,W,H);
+ landA+=(tl-landA)*LA;ovA+=(to-ovA)*LA;strA+=(ts-strA)*LA;labA+=(1-labA)*.05;
+ if(landA>.02&&landPath){ctx.save();ctx.globalAlpha=landA;ctx.beginPath();ctx.rect(box.x,box.y,box.w,box.h);ctx.clip();ctx.fillStyle="#F7F3EC";ctx.fill(landPath);ctx.strokeStyle="#D8D0C2";ctx.stroke(landPath);ctx.restore()}
+ if(ovA>.02){const y1=proj([0,23.5])[1],y2=proj([0,-23.5])[1];ctx.save();ctx.globalAlpha=ovA;ctx.fillStyle="rgba(237,119,60,.18)";ctx.fillRect(box.x,y1,box.w,y2-y1);
+  ctx.strokeStyle="#5A5A55";ctx.setLineDash([6,5]);ctx.beginPath();ctx.moveTo(box.x,y1);ctx.lineTo(box.x+box.w,y1);ctx.moveTo(box.x,y2);ctx.lineTo(box.x+box.w,y2);ctx.stroke();ctx.restore()}
+ for(const d of D){const k=RM?1:d.k;d.x+=(d.tx-d.x)*k;d.y+=(d.ty-d.y)*k;d.a+=(d.ta-d.a)*LA;d.r+=(d.tr-d.r)*LA;
+  for(let i=0;i<3;i++)d.c[i]+=(d.tc[i]-d.c[i])*LA;if(d.a<.01)continue;
+  ctx.globalAlpha=d.a;ctx.fillStyle=`rgb(${d.c[0]|0},${d.c[1]|0},${d.c[2]|0})`;ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,6.2832);ctx.fill();
+  if(strA>.05){ctx.globalAlpha=d.a*strA;ctx.strokeStyle=INK;ctx.lineWidth=.6;ctx.stroke()}}
+ if(labA>.02&&labels.length){ctx.globalAlpha=labA;ctx.fillStyle=INK;ctx.textAlign="center";
+  labels.forEach(l=>{ctx.font="700 22px system-ui,sans-serif";ctx.fillText(l.big,l.x,l.y+22);ctx.font="700 13px system-ui,sans-serif";ctx.fillText(l.name,l.x,l.y+42);ctx.font="12px system-ui,sans-serif";ctx.fillText(l.sub,l.x,l.y+58)})}
+ ctx.globalAlpha=1;requestAnimationFrame(frame)}
+function chip(p,label,set,key,color){const b=document.createElement("button");b.className="chip";b.setAttribute("aria-pressed","true");
+ b.innerHTML=(color?`<i style="background:${color}"></i>`:"")+label;
+ b.onclick=()=>{set.has(key)?set.delete(key):set.add(key);b.setAttribute("aria-pressed",set.has(key));layout();upd()};p.append(b)}
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;"),AC={"Americas":"#245E55","Asia & Oceania":"#808BC5","Europe, Africa & W. Asia":"#ED773C"};
+function mk(id,groups,keys,colors,val){const el=document.getElementById(id);
+ el.innerHTML=`<div class="leg">${keys.map((k,i)=>`<span><i style="background:${colors[i]}"></i>${esc(k)}</span>`).join("")}</div><div class="cols">`+
+ groups.map(g=>`<div class="col"><div class="grp">`+keys.map((k,i)=>{const v=val(g,k);
+  return `<div class="bw"><div class="val">${v.p}%<br>n=${v.n}</div><div class="bar" style="--h:${v.p};background:${colors[i]};transition-delay:${i*90}ms" title="${esc(g)}, ${esc(k)}: ${v.p}% (n=${v.n})"></div></div>`}).join("")+
+  `</div><div class="gl">${esc(g)}</div></div>`).join("")+`</div>`;
+ new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){el.classList.add("on");o.disconnect()}}),{threshold:.35}).observe(el)}
+function charts(){const AR=[...areaSel].sort(),pct=(a,f)=>({p:a.length?Math.round(100*a.filter(f).length/a.length):0,n:a.length});
+ mk("ch1",["<100","100-999","1k-9.9k","10k+"],AR,AR.map(a=>AC[a]||"#808BC5"),(b,a)=>pct(D.filter(d=>d.band===b&&d.area===a&&d.st!=="Extinct"),d=>d.st==="Critically endangered"));
+ mk("ch2",["All areas",...AR],["Tropics","Outside tropics"],["#ED773C","#245E55"],(g,z)=>pct(D.filter(d=>(g==="All areas"||d.area===g)&&d.zone===z),d=>d.st==="Critically endangered"||d.st==="Extinct"))}
+resize();addEventListener("resize",resize);
+fetch("https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_land.geojson").then(r=>r.json()).then(j=>{land=j;resize()}).catch(()=>{});
+d3.csv("languages_clean.csv",r=>({name:r.name,lat:+r.latitude,lon:+r.longitude,st:r.endangerment,sp:r.speakers===""?NaN:+r.speakers,area:r.world_area,band:r.size_band,zone:r.zone}))
+.then(rows=>{D=rows.filter(d=>isFinite(d.lat)&&isFinite(d.lon)&&COL[d.st]);
+ D.forEach(d=>{Object.assign(d,{x:W/2,y:-30,a:0,r:3,c:[200,200,200],tc:[200,200,200],k:.03+Math.random()*.05,u:Math.sqrt(Math.random()),th:Math.random()*6.2832,sx:Math.random(),sy:Math.random(),rk:Math.random()});areaSel.add(d.area)});
+ document.getElementById("n").textContent=D.length.toLocaleString();charts();
+ [...areaSel].sort().forEach(a=>chip(document.getElementById("areas"),a,areaSel,a));
+ ORDER.forEach(s=>chip(document.getElementById("stats"),s,stSel,s,COL[s]));
+ document.getElementById("rst").onclick=()=>{D.forEach(d=>areaSel.add(d.area));ORDER.forEach(s=>stSel.add(s));document.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-pressed","true"));layout();upd()};
+ go(scene)}).catch(()=>{document.getElementById("n").insertAdjacentHTML("afterend"," <small>(could not load the data)</small>")});
+requestAnimationFrame(frame);
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)go(e.target.dataset.s)}),{rootMargin:"-45% 0px -45% 0px"});
+document.querySelectorAll("[data-s]").forEach(s=>io.observe(s));
+addEventListener("mousemove",e=>{if(!(scene==="map"||scene==="tropics")||e.target.closest(".card,#bar,header")){tip.style.display="none";return}
+ let b=null,bd=100;for(const d of D){if(d.a<.5)continue;const q=(d.x-e.clientX)**2+(d.y-e.clientY)**2;if(q<bd){bd=q;b=d}}
+ if(!b){tip.style.display="none";return}tip.style.cssText=`display:block;left:${e.clientX+12}px;top:${e.clientY+12}px`;
+ tip.textContent=`${b.name} · ${b.st} · ${isNaN(b.sp)?"unknown":b.sp.toLocaleString()} speakers`});
+const ovl=document.getElementById("ovl");ovl.onclick=()=>ovl.style.display="none";ovl.parentElement.onmouseleave=()=>ovl.style.display="block";
+</script></body></html>
